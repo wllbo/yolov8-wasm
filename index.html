@@ -1,10 +1,58 @@
-
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Page Title</title>
-</head>
-<body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>TensorFlow JS Object Detection</title>
+        <!-- Include TensorFlow.js Library -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+        <!-- Include TensorFlow.js WASM Backend -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="image-selection">
+            <img src="./snowboard.jpg" crossOrigin="anonymous" id="snowboard" style="display:none">
+            <img src="./room.jpg" crossOrigin="anonymous" id="room" style="display:none;">
+            <img src="./beach.jpg" crossOrigin="anonymous" id="beach" style="display:none;">
+            <img src="./baseball.jpg" crossOrigin="anonymous" id="baseball" style="display:none;">
+        </div>
 
-</body>
+
+
+
+        <div id="content-container">
+            <div id="cropped-images-container">
+            </div>
+            <input type="file" id="file-upload" accept="image/*">
+
+            <h1>YOLOv8x-68m</h1>
+
+            <button id="submit-button" onclick="processImage()">Submit</button>
+
+            <div class="backends">
+                <div class="column">
+                    <h2>Remote CPU</h2>
+                    <input type="text" id="cpu-model-endpoint" placeholder="cpu model endpoint">
+                    <div id="cpu-response-time">Request Time: </div>
+                    <div id="cpu-inference-time">Inference Time: </div>
+                </div>
+            
+                <div class="column">
+                    <h2>Browser WASM CPU</h2>
+                    <div id="wasm-browser-inference-time">Inference Time: </div>
+                </div>
+            
+                <div class="column">
+                    <h2>Remote WASM CPU</h2>
+                    <input type="text" id="wasm-cpu-model-endpoint" placeholder="wasm model endpoint">
+                    <div id="wasm-cpu-response-time">Request Time: </div>
+                    <div id="wasm-cpu-inference-time">Inference Time: </div>
+                </div>
+            </div>
+
+            <canvas id="canvas" width="640" height="640" style="border:2px solid black;"></canvas>
+        </div>
+        
+        <script src="yolo-web-wasm.js"></script>
+    </body>
 </html>
